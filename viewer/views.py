@@ -1,19 +1,31 @@
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import TemplateView
+
 from viewer.models import Brand, Offer, Comment, VehicleType
 # Create your views here.
 
-def landing_page(request):
+
+class LandingView(View):
+  def get(self, request):
     return render(
         request, template_name='landing_page.html',
         context={
-            "title": "SDAcia",
+            "title": "Autobazar Belda",
             "newest_offers": Offer.objects.order_by("-offer_date").all()[:5],
             "popular_offers": Offer.objects.order_by("-view_count").all()[:5],
             "newest_comments": Comment.objects.order_by("-commented_date").all()[:5],
             }
     )
 
-
+class LandingTemplateView(TemplateView):
+  template_name = 'landing_page.html'
+  extra_context = {
+            "title": "Autobazar Belda",
+            "newest_offers": Offer.objects.order_by("-offer_date").all()[:5],
+            "popular_offers": Offer.objects.order_by("-view_count").all()[:5],
+            "newest_comments": Comment.objects.order_by("-commented_date").all()[:5],
+            }
 
 def offer(request, pk_offer):
     offer = Offer.objects.get(pk=pk_offer)
@@ -22,7 +34,7 @@ def offer(request, pk_offer):
     return render(
         request, template_name='offer.html',
         context={
-            "title": "SDAcia",
+            "title": "Autobazar Belda",
             "offer": offer,
             "comments": Comment.objects.filter(offer__pk=pk_offer).order_by("-commented_date").all(),
             "comments_count": Comment.objects.filter(offer__pk=pk_offer).order_by("-commented_date").all().count()
@@ -61,9 +73,7 @@ def search(request):
     if filter_of_year_to != "":
         filtered_offers = filtered_offers.filter(year__lt=filter_of_year_to)
 
-    
 
-    
     return render(
         request, template_name='search.html',
         context={
@@ -72,13 +82,6 @@ def search(request):
             "all_brands": Brand.objects.all(),
             "all_types": VehicleType.objects.all()
             }
-    )
-
-def form_example(request):
-    category_name = request.POST.get("category_name", "nothing")
-    return render(
-        request, template_name='landing_page.html',
-        context={"title": "Titulek", "category_name": category_name}
     )
 
 
