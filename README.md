@@ -1,4 +1,7 @@
-# Car dealer project
+**Project Status**: This project is currently a work in progress and is being updated regularly.
+
+
+# Car dealer project [WIP]
 ### Self-presentation Project
 Tato webová aplikace byla vytvořena jako simulace stránek autobazaru, zaměřená na rozvoj programovacích dovedností.
 Aplikace není určena pro reálné inzerování, nakupování ani prodávání vozidel.
