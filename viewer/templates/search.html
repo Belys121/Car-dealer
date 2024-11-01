@@ -38,7 +38,7 @@
     </tr>
     {% for offer in offers %}
     <tr style="margin-top: 10px; border-top: 2px black solid;">
-        <td>Datum přidání: {{ offer.offer_date }} <a href="/offer/{{offer.pk}}">Detail</a></p></td>
+        <td><p>Datum přidání: {{ offer.offer_date }} <a href="/offer/{{offer.pk}}">Detail</a></p></td>
         <td>{{ offer.brand.name }}</td>
         <td>{{ offer.vehicle_type.name }}</td>
         <td>{{offer.power}} kw</td>

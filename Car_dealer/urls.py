@@ -16,27 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from viewer.views import search, add_offer, offer, add_comment, LandingTemplateView
-from viewer.models import Brand, Comment, Offer, VehicleType
-from django.shortcuts import render
-
-admin.site.register(Brand)
-admin.site.register(Comment)
-admin.site.register(Offer)
-admin.site.register(VehicleType)
-
 from viewer.example_form import BrandView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', LandingView.as_view(), name="landing_page"),
     path('', LandingTemplateView.as_view(), name="landing_page"),
-    path('search/', search),
+    path('search', search),
     path('add_offer/', add_offer, name="add_offer"),
-    path('add_comment/', add_comment),
+    path('add_comment', add_comment),
     path('offer/<pk_offer>', offer, name='offer'),
     # path('cars_view', CarsView.as_view() ),
-    path('brand_form/', BrandView.as_view() ),
-    path('brand_create/', BrandView.as_view()),
+    path('brand_form', BrandView.as_view() ),
+    path('brand_create', BrandView.as_view()),
 
 
 ]

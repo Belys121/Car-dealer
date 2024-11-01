@@ -4,7 +4,7 @@
 <h1>{{ title }}</h1>
 <h2>{{ status }}</h2>
 
-<form action="/add_offer" method="POST">
+<form action="/add_offer/" method="POST">
     {% csrf_token %}
     Popisek: <input name="description"></br>
     <select name="brand">      

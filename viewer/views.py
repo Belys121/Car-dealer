@@ -1,31 +1,19 @@
 from django.shortcuts import render
-from django.views import View
 from django.views.generic import TemplateView
 
 from viewer.models import Brand, Offer, Comment, VehicleType
-# Create your views here.
 
-
-class LandingView(View):
-  def get(self, request):
-    return render(
-        request, template_name='landing_page.html',
-        context={
-            "title": "Autobazar Belda",
-            "newest_offers": Offer.objects.order_by("-offer_date").all()[:5],
-            "popular_offers": Offer.objects.order_by("-view_count").all()[:5],
-            "newest_comments": Comment.objects.order_by("-commented_date").all()[:5],
-            }
-    )
 
 class LandingTemplateView(TemplateView):
-  template_name = 'landing_page.html'
-  extra_context = {
-            "title": "Autobazar Belda",
-            "newest_offers": Offer.objects.order_by("-offer_date").all()[:5],
-            "popular_offers": Offer.objects.order_by("-view_count").all()[:5],
-            "newest_comments": Comment.objects.order_by("-commented_date").all()[:5],
-            }
+    template_name = 'landing_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["newest_offers"] = Offer.objects.order_by("-offer_date").all()[:5]
+        context["popular_offers"] = Offer.objects.order_by("-view_count").all()[:5]
+        context["newest_comments"] = Comment.objects.order_by("-commented_date").all()[:5]
+        return context
+
 
 def offer(request, pk_offer):
     offer = Offer.objects.get(pk=pk_offer)
