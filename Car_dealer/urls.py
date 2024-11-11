@@ -21,13 +21,13 @@ from viewer.example_form import BrandView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LandingTemplateView.as_view(), name="landing_page"),
-    path('search', search),
+    path('search', search, name="search"),
     path('add_offer/', add_offer, name="add_offer"),
-    path('add_comment', add_comment),
+    path('add_comment', add_comment, name="add_comment"),
     path('offer/<pk_offer>', offer, name='offer'),
     # path('cars_view', CarsView.as_view() ),
-    path('brand_form', BrandView.as_view() ),
-    path('brand_create', BrandView.as_view()),
+    path('brand_form', BrandView.as_view(), name="brand_form" ),
+    path('brand_create', BrandView.as_view(), name="brand_create"),
 
 
 ]

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block main_title %} {{ title }} {% endblock %}
+
 {% block content %}
 <h1>{{ title }}</h1>
 
@@ -7,13 +7,13 @@
     {% csrf_token %}
     Popisek: <input name="search_description"></br>
     <select name="search_brand">      
-        <option value="">All brands</option>  
+        <option value="">--Značka--</option>  
         {% for brand in all_brands %}
         <option value="{{brand.pk}}">{{brand.name}}</option>        
         {% endfor %}
     </select>
     <select name="search_type">      
-        <option value="">All types</option>  
+        <option value="">--Typ karoserie--</option>  
         {% for type in all_types %}
         <option value="{{type.pk}}">{{type.name}}</option>        
         {% endfor %}

@@ -94,14 +94,58 @@
         </div>
     </nav>
 
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/picture1.png' %}" class="d-block w-100" alt="First Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/picture2.png' %}" class="d-block w-100" alt="Second Slide">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/picture3.png' %}" class="d-block w-100" alt="Third Slide">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    <div class="homepageCategory">
+        <a data-ga-event="click" data-ga-event-category="tab-kategorie" data-ga-event-action="Black Friday" data-ga-event-event="click_dlazdice_black_friday" data-ga-event-label="Homepage" class="homepageCategoryItem" href="/search" style="background:#000000 url('/images/modern/svg/percentGrey2.svg') no-repeat 0 0;background-size:100%">
+            <div>
+                <h3 class="m0">Black Friday</h3>(2321 vozů)
+            </div>
+            <img alt="Black Friday" src="{% static 'images/fridayvozy.png' %}" >
+        </a>
+        <a data-ga-event="click" data-ga-event-category="tab-kategorie" data-ga-event-action="Úsporné vozy" data-ga-event-event="click_dlazdice_usporne_vozy" data-ga-event-label="Homepage" class="homepageCategoryItem" href="/add_offer">
+            <div>
+                <h3 class="m0">Úsporné vozy</h3>
+                (1931 vozů)
+            </div>
+        <img alt="Úsporné vozy" src="{% static 'images/uspornevozy.png' %}">
+        </a>
+    </div>
+    
+
     <!-- Main content container with padding -->
     <div class="container" style="padding-top: 70px;">
         {% block content %}
         {% endblock %}
     </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
