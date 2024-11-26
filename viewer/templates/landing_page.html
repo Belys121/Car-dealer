@@ -3,24 +3,27 @@
 {% block content %}
 {{ block.super }}
 
-<div class="container-fluid">
-<h2>Nejnovější inzeráty (TOP 5)</h2>
+<div class="container">
+    <h2 class="text-center">Nejnovější inzeráty (TOP 5)</h2>
+    <ul class="list-group text-center">
+        {% for offer in newest_offers %}
+        <li class="list-group-item">Datum přidání: {{ offer.offer_date }} Nabídka auta {{ offer.brand.name }}, výkon: {{offer.power}} cena: {{ offer.price }}
+            <a href="{% url 'offer' offer.pk %}">Detail</a></li>
+        {% endfor %}
+    </ul>
 
-{% for offer in newest_offers %}
-<p>Datum přidání: {{ offer.offer_date }} Nabídka auta {{ offer.brand.name }}, výkon: {{offer.power}} cena: {{ offer.price }} 
-    <a href="{% url 'offer' offer.pk %}">Detail</a></p>
-{% endfor %}
+    <h2 class="text-center">Nejpopulárnější inzeráty  (TOP 5)</h2>
+        <ul class="list-group text-center">
+            {% for offer in popular_offers %}
+                <li class="list-group-item">Počet zobrazení: {{ offer.view_count }}, výkon: {{offer.power}} cena: {{ offer.price }} <a href="/offer/{{offer.pk}}">Detail</a></li>
+            {% endfor %}
+        </ul>
 
-<h2>Nejpopulárnější inzeráty  (TOP 5)</h2>
-
-{% for offer in popular_offers %}
-<p>Počet zobrazení: {{ offer.view_count }}, výkon: {{offer.power}} cena: {{ offer.price }} <a href="/offer/{{offer.pk}}">Detail</a></p>
-{% endfor %}
-
-<h2>Nejnovější komentáře  (TOP 5)</h2>
-
-{% for comment in newest_comments %}
-<p>Nejnovější komentář: {{ comment.commented_date }} - {{ comment.text }}</p>
-{% endfor %}
+    <h2 class="text-center">Nejnovější komentáře  (TOP 5)</h2>
+        <ul class="list-group text-center">
+            {% for comment in newest_comments %}
+                <li class="list-group-item">Nejnovější komentář: {{ comment.commented_date }} - {{ comment.text }}</li>
+            {% endfor %}
+        </ul>
 </div>
 {% endblock %}

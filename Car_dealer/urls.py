@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from viewer.views import search, add_offer, offer, add_comment, LandingTemplateView, BlackFridayView
+from viewer.views import search, add_offer, offer, add_comment, LandingTemplateView, BlackFridayView, EconomicalCarsView
 from viewer.example_form import BrandView
 
 
@@ -29,6 +29,7 @@ urlpatterns = [
     path('brand_form', BrandView.as_view(), name="brand_form" ),
     path('brand_create', BrandView.as_view(), name="brand_create"),
     path('black_friday/', BlackFridayView.as_view(), name='black_friday'),
+    path('economical_cars', EconomicalCarsView.as_view(), name='economical_cars')
 
 
 ]

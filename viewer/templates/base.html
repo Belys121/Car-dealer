@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href='/'>Autobazar Belda</a>
+            <a class="navbar-brand" href="{% url 'landing_page' %}">Autobazar Belda</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -84,7 +84,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/search">Přihlásit se</a>
+                        <a class="nav-link" href="{% url 'search' %}">Přihlásit se</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
