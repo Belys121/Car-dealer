@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block main_title %} {{ title }} {% endblock %}
+
 {% block content %}
 <h1>{{ title }}</h1>
 
@@ -7,13 +7,13 @@
     {% csrf_token %}
     Popisek: <input name="search_description"></br>
     <select name="search_brand">      
-        <option value="">All brands</option>  
+        <option value="">--Značka--</option>  
         {% for brand in all_brands %}
         <option value="{{brand.pk}}">{{brand.name}}</option>        
         {% endfor %}
     </select>
     <select name="search_type">      
-        <option value="">All types</option>  
+        <option value="">--Typ karoserie--</option>  
         {% for type in all_types %}
         <option value="{{type.pk}}">{{type.name}}</option>        
         {% endfor %}
@@ -24,30 +24,36 @@
     <br>Rok do: <input name="search_year_to"></br>
     <input type="submit">
 </form>
-
-<h2>Nalezené inzeráty</h2>
-<table>
-    <tr>
-        <th>Datum přidání</th>
-        <th>Značka</th>
-        <th>Typ</th>
-        <th>Výkon</th>
-        <th>Rok</th>
-        <th>Cena</th>
-        <th>Popis</th>
-    </tr>
-    {% for offer in offers %}
-    <tr style="margin-top: 10px; border-top: 2px black solid;">
-        <td>Datum přidání: {{ offer.offer_date }} <a href="/offer/{{offer.pk}}">Detail</a></p></td>
-        <td>{{ offer.brand.name }}</td>
-        <td>{{ offer.vehicle_type.name }}</td>
-        <td>{{offer.power}} kw</td>
-        <td>{{offer.year}}</td>
-        <td>{{ offer.price }} Kč</td>
-        <td>{{offer.description}}</td>        
-    </tr>
-    </span>
-    {% endfor %}
-</table>
+<div class="container my-4">
+    <h2>Nalezené inzeráty</h2>
+    <table class="table table-hover table-bordered text-center">
+        <thead>
+            <tr class="table-secondary">
+                <th>Datum přidání</th>
+                <th>Značka</th>
+                <th>Typ</th>
+                <th>Výkon</th>
+                <th>Rok</th>
+                <th>Cena</th>
+                <th>Popis</th>
+                <th>Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offer in offers %}
+            <tr class="{% cycle 'table-light' 'table-secondary' %}">
+                <td>{{ offer.offer_date|date:"d.m.Y" }}</td>
+                <td>{{ offer.brand.name }}</td>
+                <td>{{ offer.vehicle_type.name }}</td>
+                <td>{{ offer.power }} kw</td>
+                <td>{{ offer.year }}</td>
+                <td>{{ offer.price }} Kč</td>
+                <td>{{ offer.nameoffer }}</td>
+                <td><a href="/offer/{{ offer.pk }}">Detail</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
