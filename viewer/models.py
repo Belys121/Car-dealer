@@ -21,11 +21,12 @@ class Offer(Model):
     brand = ForeignKey(Brand, on_delete=DO_NOTHING)
     vehicle_type = ForeignKey(VehicleType, on_delete=DO_NOTHING)
     price = IntegerField()
-    description = TextField()
+    nameoffer = TextField()
     power = IntegerField()
     year = IntegerField()
     offer_date = DateTimeField(default=datetime.now)
     view_count = IntegerField(default=0)
+    descriptionoffer = TextField()
 
 
     def __str__(self):

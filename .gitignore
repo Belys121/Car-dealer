@@ -12,7 +12,6 @@ venv/
 # Django
 **/migrations/
 db.sqlite3
-/static/
 /media/
 
 # Logs

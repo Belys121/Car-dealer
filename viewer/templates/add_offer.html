@@ -4,7 +4,7 @@
 
 <form action="/add_offer/" method="POST">
     {% csrf_token %}
-    Popisek: <input name="description"></br>
+    Název inzerátu: <input name="description"></br>
     <select name="brand">      
         <option value="">Vyber značku</option>  
         {% for brand in all_brands %}
@@ -19,8 +19,9 @@
     </select>
     <br>Cena:<input name="price" value="0"></br>
     <br>Rok:<input name="year" value="0"></br>
-    <br>Power:<input name="power" value="0"></br>
-    <input type="submit">
+    <br>Výkon (kW):<input name="power" value="0"></br>
+    Popis inzerátu: <input name="description"></br>
+    <input type="submit" value="Uložit">
 </form>
 
 {% endblock %}
