@@ -1,0 +1,21 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to Render
+      uses: johnbeynon/render-deploy-action@v0.0.8
+      with:
+        api-key: ${{ secrets.RENDER_API_KEY }}
+        service-id: srv-ctcs7fi3esus73blr3e0?key=3tr7t4SR7PM
+        wait-for-success: true

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: Car-dealer
+    env: python
+    region: oregon  # nebo jiná dostupná oblast
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --no-input"
+    startCommand: "gunicorn Car_dealer.wsgi.application"
+    autoDeploy: true
+    repo: https://github.com/Belys121/Car-dealer
+    branch: main
+    pythonVersion: 3.12
