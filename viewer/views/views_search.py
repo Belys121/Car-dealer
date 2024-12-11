@@ -36,7 +36,7 @@ def search(request):
 
 
     return render(
-        request, template_name='search.html',
+        request, template_name='navbar_menu/search.html',
         context={
             "title": "Hledat",
             "offers": filtered_offers,

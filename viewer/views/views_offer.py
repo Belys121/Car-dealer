@@ -7,7 +7,7 @@ def offer(request, pk_offer):
     offer.view_count += 1
     offer.save()
     return render(
-        request, template_name='offer.html',
+        request, template_name='offers/offer.html',
         context={
             "title": "Autobazar Belda",
             "offer": offer,
@@ -35,7 +35,7 @@ def add_offer(request):
         pass
 
     return render(
-        request, template_name='add_offer.html',
+        request, template_name='navbar_menu/add_offer.html',
         context={
             "title": "Přidat inzerát",
             "all_brands": Brand.objects.all(),
