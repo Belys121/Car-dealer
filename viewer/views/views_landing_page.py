@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from viewer.models import Offer, Comment
 
 class LandingTemplateView(TemplateView):
-    template_name = 'landing_page.html'
+    template_name = 'base_homepage_landingpage/landing_page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -6,5 +6,5 @@ from viewer.forms import BrandForm
 from django.views.generic import FormView
 
 class BrandView(FormView):
-    template_name = 'form.html'
+    template_name = 'forms/form.html'
     form_class = BrandForm
