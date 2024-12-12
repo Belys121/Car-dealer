@@ -10,7 +10,7 @@ venv/
 .venv/
 
 # Django
-**/migrations/
+
 db.sqlite3
 /media/
 
