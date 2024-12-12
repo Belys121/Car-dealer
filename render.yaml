@@ -9,3 +9,6 @@ services:
     repo: https://github.com/Belys121/Car-dealer
     branch: main
     pythonVersion: 3.12
+    static:
+      - path: /static/
+        source: staticfiles
