@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'viewer'
+    'viewer',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +35,6 @@ MIDDLEWARE = [
 if not DEBUG:  # Použít whitenoise a staticfiles storage pouze v produkci
     MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Pro collectstatic
 
 ROOT_URLCONF = 'Car_dealer.urls'
 
@@ -57,9 +56,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Car_dealer.wsgi.application'
 
+# Database configuration
 DATABASES = {
     'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -77,9 +78,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
+# STATIC_ROOT musí být vždy definované
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 if DEBUG:  # Lokální prostředí
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'viewer/static')]
-else:  # Produkční prostředí
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

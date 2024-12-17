@@ -20,7 +20,7 @@ jobs:
       run: python manage.py check --deploy
 
     - name: Collect static files
-      run: python manage.py collectstatic --dry-run --no-input
+      run: python manage.py collectstatic --no-input
 
     - name: Deploy to Render
       uses: johnbeynon/render-deploy-action@v0.0.8
