@@ -9,6 +9,9 @@ Aplikace není určena pro reálné inzerování, nakupování ani prodávání 
 This web application was created as a simulation of a car dealership website, focused on developing programming skills.
 The application is not intended for real advertising, buying, or selling of vehicles.
 
+## You can try the project on the production website:  
+**[https://car-dealer-5p5j.onrender.com](https://car-dealer-5p5j.onrender.com)**
+
 ## Project Goals
 ### The project allows users to:
 

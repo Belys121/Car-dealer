@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from viewer.models import Brand, Offer, Comment, VehicleType
+from viewer.views.forms import OfferForm
 
 
 def offer(request, pk_offer):
@@ -18,28 +19,19 @@ def offer(request, pk_offer):
 
 
 def add_offer(request):
-    status = ""
-    if "description" in request.POST:
-        brand = request.POST.get("brand", "")
-        vehicle_type = request.POST.get("type", "")
-
-        new_offer = Offer()
-        new_offer.description = request.POST.get("description", "")
-        new_offer.price = int(request.POST.get("price", 0))
-        new_offer.year = int(request.POST.get("year", 0))
-        new_offer.power = int(request.POST.get("power", 0))
-        new_offer.brand = Brand.objects.get(pk=brand)
-        new_offer.vehicle_type = VehicleType.objects.get(pk=vehicle_type)
-        new_offer.save()
-        status = "Přidáno"
-        pass
+    if request.method == 'POST':
+        form = OfferForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add_offer')  # Přesměrování po úspěšném uložení
+    else:
+        form = OfferForm()
 
     return render(
-        request, template_name='navbar_menu/add_offer.html',
-        context={
+        request,
+        'navbar_menu/add_offer.html',
+        {
             "title": "Přidat inzerát",
-            "all_brands": Brand.objects.all(),
-            "all_types": VehicleType.objects.all(),
-            "status": status
+            "form": form,
         }
     )

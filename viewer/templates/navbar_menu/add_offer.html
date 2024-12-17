@@ -1,27 +1,68 @@
 {% extends "base_homepage_landingpage/base.html" %}
+
 {% block content %}
-<h1>{{ title }}</h1>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Přidat nový inzerát</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
 
-<form action="/add_offer/" method="POST">
-    {% csrf_token %}
-    Název inzerátu: <input name="description"></br>
-    <select name="brand">      
-        <option value="">Vyber značku</option>  
-        {% for brand in all_brands %}
-        <option value="{{brand.pk}}">{{brand.name}}</option>        
-        {% endfor %}
-    </select>
-    <select name="type">      
-        <option value="">Typ karoserie</option>  
-        {% for type in all_types %}
-        <option value="{{type.pk}}">{{type.name}}</option>        
-        {% endfor %}
-    </select>
-    <br>Cena:<input name="price" value="0"></br>
-    <br>Rok:<input name="year" value="0"></br>
-    <br>Výkon (kW):<input name="power" value="0"></br>
-    Popis inzerátu: <input name="description"></br>
-    <input type="submit" value="Uložit">
-</form>
+                        <!-- Název inzerátu -->
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Název inzerátu:</label>
+                            <input type="text" class="form-control" id="id_name" name="nameoffer" placeholder="Zadejte název inzerátu">
+                        </div>
 
+
+                        <!-- Výběr značky -->
+                        <div class="mb-3">
+                            <label for="id_brand" class="form-label">Vyber značku:</label>
+                            {{ form.brand }}
+                        </div>
+
+                        <!-- Typ karoserie -->
+                        <div class="mb-3">
+                            <label for="id_type" class="form-label">Typ karoserie:</label>
+                            {{ form.vehicle_type }}
+                        </div>
+
+                        <!-- Cena -->
+                        <div class="mb-3">
+                            <label for="id_price" class="form-label">Cena:</label>
+                            {{ form.price }}
+                        </div>
+
+                        <!-- Rok výroby -->
+                        <div class="mb-3">
+                            <label for="id_year" class="form-label">Rok výroby:</label>
+                            {{ form.year }}
+                        </div>
+
+                        <!-- Výkon (kW) -->
+                        <div class="mb-3">
+                            <label for="id_power" class="form-label">Výkon (kW):</label>
+                            {{ form.power }}
+                        </div>
+
+                        <!-- Popis auta -->
+                        <div class="mb-3">
+                            <label for="id_description" class="form-label">Popis auta:</label>
+                            {{ form.descriptionoffer }}
+                        </div>
+
+                        <!-- Tlačítko pro odeslání -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4">Vytvořit inzerát</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

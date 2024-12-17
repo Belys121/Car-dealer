@@ -8,7 +8,7 @@ def search(request):
 
     filter_of_description = request.POST.get("search_description", "")
     if filter_of_description != "":
-        filtered_offers = filtered_offers.filter(description__contains=filter_of_description)
+        filtered_offers = filtered_offers.filter(nameoffer__icontains=filter_of_description)
 
     filter_of_brand = request.POST.get("search_brand", "")
     if filter_of_brand != "":
