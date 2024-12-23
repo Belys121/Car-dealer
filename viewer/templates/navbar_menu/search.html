@@ -1,29 +1,68 @@
 {% extends "base_homepage_landingpage/base.html" %}
 
 {% block content %}
-<h1>{{ title }}</h1>
 
-<form action="/search" method="POST">
-    {% csrf_token %}
-    Popisek: <input name="search_description"></br>
-    <select name="search_brand">      
-        <option value="">--Značka--</option>  
-        {% for brand in all_brands %}
-        <option value="{{brand.pk}}">{{brand.name}}</option>        
-        {% endfor %}
-    </select>
-    <select name="search_type">      
-        <option value="">--Typ karoserie--</option>  
-        {% for type in all_types %}
-        <option value="{{type.pk}}">{{type.name}}</option>        
-        {% endfor %}
-    </select>
-    <br>Cena od: <input name="search_price_from"></br>
-    <br>Cena do: <input name="search_price_to"></br>
-    <br>Rok od: <input name="search_year_from"></br>
-    <br>Rok do: <input name="search_year_to"></br>
-    <input type="submit">
-</form>
+<div class="container mt-4">
+    <form action="/search" method="POST" class="d-flex align-items-center bg-light p-3 rounded">
+        {% csrf_token %}
+        <div class="me-3">
+            <label for="search_brand" class="form-label d-none">Značka</label>
+            <select name="search_brand" id="search_brand" class="form-select form-select-sm">
+                <option value="">Značka</option>
+                {% for brand in all_brands %}
+                <option value="{{ brand.pk }}">{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="me-3">
+            <label for="search_vehicle_type" class="form-label d-none">Model</label>
+            <select name="search_type" id="search_vehicle_type" class="form-select form-select-sm">
+                <option value="">Model</option>
+                {% for type in all_types %}
+                <option value="{{ type.pk }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="me-3">
+            <label for="search_year_from" class="form-label d-none">Rok</label>
+            <select name="search_year_from" id="search_year_from" class="form-select form-select-sm">
+                <option value="">Rok</option>
+                <!-- Přidejte možnosti roků -->
+                {% for year in years %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="me-3">
+            <label for="search_price_from" class="form-label d-none">Cena od</label>
+            <input type="number" name="search_price_from" id="search_price_from" class="form-control form-control-sm" placeholder="Cena od">
+        </div>
+
+        <div class="me-3">
+            <label for="search_price_to" class="form-label d-none">Cena do</label>
+            <input type="number" name="search_price_to" id="search_price_to" class="form-control form-control-sm" placeholder="Cena do">
+        </div>
+
+        <div class="me-3">
+            <label for="search_vehicle_type" class="form-label d-none">Palivo</label>
+            <select name="search_fuel_type" id="search_fuel_type" class="form-select form-select-sm">
+                <option value="">Palivo</option>
+                {% for fuel in all_fuel %}
+                <option value="{{ fuel.pk }}">{{ fuel.name }}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fas fa-search"></i> Hledat
+        </button>
+    </form>
+</div>
+
 <div class="container my-4">
     <h2>Nalezené inzeráty</h2>
     <table class="table table-hover table-bordered text-center">
@@ -33,9 +72,11 @@
                 <th>Značka</th>
                 <th>Typ</th>
                 <th>Výkon</th>
+                <th>Palivo</th>
+                <th>Najeto</th>
                 <th>Rok</th>
                 <th>Cena</th>
-                <th>Popis</th>
+                <th>Název inzerátu</th>
                 <th>Detail</th>
             </tr>
         </thead>
@@ -46,6 +87,8 @@
                 <td>{{ offer.brand.name }}</td>
                 <td>{{ offer.vehicle_type.name }}</td>
                 <td>{{ offer.power }} kw</td>
+                <td>{{ offer.fuel_type.name }}</td>
+                <td>{{ offer.km  }} km</td>
                 <td>{{ offer.year }}</td>
                 <td>{{ offer.price }} Kč</td>
                 <td>{{ offer.nameoffer }}</td>

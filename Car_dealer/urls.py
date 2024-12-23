@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from viewer.views import search, add_offer, offer, add_comment, LandingTemplateView, BlackFridayView, EconomicalCarsView
+from viewer.views import search, add_comment, LandingTemplateView, BlackFridayView, EconomicalCarsView, OfferListView, \
+    OfferDetailView, OfferCreateView, OfferUpdateView, OfferDeleteView
 from viewer.example_form import BrandView
 
 
@@ -23,13 +24,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LandingTemplateView.as_view(), name="landing_page"),
     path('search', search, name="search"),
-    path('add_offer/', add_offer, name="add_offer"),
     path('add_comment', add_comment, name="add_comment"),
-    path('offer/<pk_offer>', offer, name='offer'),
     path('brand_form', BrandView.as_view(), name="brand_form" ),
     path('brand_create', BrandView.as_view(), name="brand_create"),
     path('black_friday/', BlackFridayView.as_view(), name='black_friday'),
-    path('economical_cars', EconomicalCarsView.as_view(), name='economical_cars')
+    path('economical_cars', EconomicalCarsView.as_view(), name='economical_cars'),
+    path('offers/', OfferListView.as_view(), name='offer_list'),
+    path('offer/<int:pk>/', OfferDetailView.as_view(), name='offer_detail'),
+    path('offer/add/', OfferCreateView.as_view(), name='offer_add'),
+    path('offer/<int:pk>/update/', OfferUpdateView.as_view(), name='offer_update'),
+    path('offer/<int:pk>/delete/', OfferDeleteView.as_view(), name='offer_delete'),
 
 
 ]

@@ -8,7 +8,7 @@
     <ul class="list-group text-center">
         {% for offer in newest_offers %}
         <li class="list-group-item">Datum přidání: {{ offer.offer_date |date:"d.m.Y" }} Nabídka auta {{ offer.brand.name }}, výkon: {{offer.power}} cena: {{ offer.price }}
-            <a href="{% url 'offer' offer.pk %}">Detail</a></li>
+            <a href="{% url 'offer_detail' offer.pk %}">Detail</a></li>
         {% endfor %}
     </ul>
 

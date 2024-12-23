@@ -1,46 +1,47 @@
 from django.shortcuts import render
-from viewer.models import Brand, Offer, Comment, VehicleType
+from django.db.models import Q
+from viewer.models import Brand, Offer, VehicleType, FuelType
 
 
 def search(request):
+    # Vytvoření prázdného Q objektu (žádné filtry na začátku)
+    query = Q()
 
-    filtered_offers = Offer.objects.all()
+    # Zpracování filtrů z POST dat
+    if description := request.POST.get("search_description", ""):
+        query &= Q(nameoffer__icontains=description)
 
-    filter_of_description = request.POST.get("search_description", "")
-    if filter_of_description != "":
-        filtered_offers = filtered_offers.filter(nameoffer__icontains=filter_of_description)
+    if brand := request.POST.get("search_brand", ""):
+        query &= Q(brand__pk=brand)
 
-    filter_of_brand = request.POST.get("search_brand", "")
-    if filter_of_brand != "":
-        filtered_offers = filtered_offers.filter(brand__pk=filter_of_brand)
+    if price_from := request.POST.get("search_price_from", ""):
+        query &= Q(price__gte=int(price_from))
 
-    filter_of_price_from = request.POST.get("search_price_from", "")
-    if filter_of_price_from != "":
-        filtered_offers = filtered_offers.filter(price__gt=filter_of_price_from)
+    if price_to := request.POST.get("search_price_to", ""):
+        query &= Q(price__lte=int(price_to))
 
-    filter_of_price_to = request.POST.get("search_price_to", "")
-    if filter_of_price_to != "":
-        filtered_offers = filtered_offers.filter(price__lt=filter_of_price_to)
+    if vehicle_type := request.POST.get("search_type", ""):
+        query &= Q(vehicle_type__pk=vehicle_type)
 
-    filter_of_type= request.POST.get("search_type", "")
-    if filter_of_type != "":
-        filtered_offers = filtered_offers.filter(vehicle_type__pk=filter_of_type)
+    if year_from := request.POST.get("search_year_from", ""):
+        query &= Q(year__gt=year_from)
 
-    filter_of_year_from = request.POST.get("search_year_from", "")
-    if filter_of_year_from != "":
-        filtered_offers = filtered_offers.filter(year__gt=filter_of_year_from)
+    if year_to := request.POST.get("search_year_to", ""):
+        query &= Q(year__lt=year_to)
 
-    filter_of_year_to = request.POST.get("search_year_to", "")
-    if filter_of_year_to != "":
-        filtered_offers = filtered_offers.filter(year__lt=filter_of_year_to)
+    if fuel_type := request.POST.get("search_fuel_type", ""):
+        query &= Q(fuel_type__pk=fuel_type)
 
+    # Aplikace filtrů na záznamy
+    filtered_offers = Offer.objects.filter(query)
 
     return render(
-        request, template_name='navbar_menu/search.html',
+        request,
+        template_name='navbar_menu/search.html',
         context={
-            "title": "Hledat",
             "offers": filtered_offers,
             "all_brands": Brand.objects.all(),
-            "all_types": VehicleType.objects.all()
-            }
+            "all_types": VehicleType.objects.all(),
+            "all_fuel": FuelType.objects.all(),
+        }
     )

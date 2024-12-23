@@ -9,6 +9,7 @@
     <p><b>Typ vozu:</b>{{ offer.vehicle_type.name}}</p>
     <p><b>Rok výroby:</b>{{ offer.year}}</p>
     <p><b>Nabídnuto:</b>{{ offer.offer_date}}</p>
+<a href="{% url 'offer_update' offer.pk %}" class="btn btn-danger btn-sm">Upravit</a>
 
 <h3>Komentáře:</h3>
     {% if comments_count  == 0 %}
@@ -27,6 +28,8 @@
         <input name="pk_offer" type="hidden" value="{{offer.pk}}"></br>
         <input type="submit">
     </form>
+
+
 
 
 {% endblock %}
